@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import api from '../utils/api'
 
@@ -6,6 +6,11 @@ export default function Login() {
   const navigate = useNavigate()
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (token) navigate('/', { replace: true })
+  }, [navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
