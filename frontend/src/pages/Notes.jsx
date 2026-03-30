@@ -17,6 +17,7 @@ export default function Notes() {
   const [newNote, setNewNote] = useState({ title: '', content: '', color: '#ffffff' })
   const [selectedNote, setSelectedNote] = useState(null)
   const [activeModal, setActiveModal] = useState(null)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user')
@@ -104,10 +105,10 @@ export default function Notes() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
-      <Sidebar />
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
       <div className="flex-1 flex flex-col">
-        <Navbar search={search} onSearchChange={setSearch} user={user} onLogout={logout} />
+        <Navbar search={search} onSearchChange={setSearch} user={user} onLogout={logout} onMenuClick={() => setIsSidebarOpen(true)} />
 
         <main className="flex-1 p-6 overflow-y-auto">
           <div className="max-w-3xl mx-auto">
